@@ -1,13 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import SearchBar from './components/search_bar';
+
+// youtube api key
+const API_KEY = '....';
+
 
 // this is a component, think of it as a class.
 // we are creating a class of a component
 // we create a instance of this component
 // thus created instance is sent to render function.
 // creating instance = <App /> or <App></App>
-const App = function(){
-  return <div>Hola hermano !! </div>;
+const App = () => {
+  return (<div>
+  <SearchBar />
+  </div>
+);
 }
 
 
