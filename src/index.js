@@ -28,33 +28,34 @@ class App extends Component {
 
   this.state = {
     videos:[],
-    slectedVideo: null
+    slectedVideo: null,
+    term:''
   };
 
-  this.videoSearch('best gopro adventures');
+  this.videoSearch(' ');
+
   }
 
   videoSearch(term){
-
-    YTSearch({key: API_KEY, term: term}, (data) => {
-      this.setState({
-        videos: data,
-        selectedVideo: data[0]
-        });
-    });
-
+    this.search(term);
   }
 
   videoSearchEnter(term){
+    this.search(term);
+  }
+
+  search(term){
 
     YTSearch({key: API_KEY, term: term}, (data) => {
       this.setState({
         videos: data,
-        selectedVideo: data[0]
+        selectedVideo: data[0],
+        term: term
         });
     });
 
   }
+
 
 
 render(){
@@ -63,7 +64,7 @@ render(){
   return (
     <div>
       <SearchBar onSearchTermChange={throttle} enterSearch={term => this.videoSearchEnter(term)}/>
-      <VideoDetail video={this.state.selectedVideo} />
+      <VideoDetail video={this.state.selectedVideo} searchTerm={this.state.term}/>
       <VideoList
         videos={this.state.videos}
         onVideoSelect = {selectedVideo => this.setState({selectedVideo})}
