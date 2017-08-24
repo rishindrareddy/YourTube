@@ -16,23 +16,57 @@ class SearchBar extends Component {
   super(props); //just like java super method to invoke parent class constructor
 
   this.state = { term: ''}; //holds the state object.
+  //binds the react handleSubmit function with the function mentioned in our funciton.
+ this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   render() {
     // setstate is safe way(good practice) of updating state object outside constructor,
     //  because parallelly lot of operations are performed on state object in the library
     // so it lets the library know about the change through setState method.
+
+      // to be used if enter key is used to trigger search request
   return (
-    <div>
-    <input onChange = {(event) => this.setState({term: event.target.value}) } />
+    <div className="search-bar">
+    <form onSubmit={this.handleSubmit}>
+    <input className="search-text"
+    value={this.state.term}
+    onChange = {(event) => this.onInputChange(event.target.value)} placeholder="search" />
+    </form>
     </div>
   );
+
+// to be used to disable search on enter
+  // return (
+  //   <div className="search-bar">
+  //   <input
+  //   value={this.state.term}
+  //   onChange = {(event) => this.onInputChange(event.target.value)} />
+  //   </div>
+  // );
+
   }
 
-// alternative code to above inline function
-  // onInputChange(event) {
-  //   console.log(event.target.value);
-  // }
+    // genreic submit handler invokes our custom handler by passing the search text
+  handleSubmit(event) {
+    // invokes callback to search for videos.
+    this.props.enterSearch(this.state.term);
+    // below code to prevent default behaviour of react for this event.
+    event.preventDefault();
+  }
+
+
+  // alternative code to above inline function
+  onInputChange(term) {
+    this.setState({term});
+    this.onSubmitSearch(term);
+  }
+
+  // custom submit handler invokes callback to the function that invokes youtube search.
+  onSubmitSearch(term){
+    // console.log(term);
+    this.props.onSearchTermChange(term);
+  }
 
 }
 
