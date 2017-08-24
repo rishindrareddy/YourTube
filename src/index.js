@@ -58,7 +58,7 @@ class App extends Component {
 
 
 render(){
-  const throttle = _.debounce((term) => {this.videoSearch(term)},300);
+  const throttle = _.debounce((term) => {this.videoSearch(term)},400);
 
   return (
     <div>
