@@ -8,7 +8,7 @@ import VideoDetail from './components/video_detail'
 import _ from 'lodash';
 
 // youtube api key
-const API_KEY = 'AIzaSyA3dNhoUhh9H0A5yATxwsZDwcZ70uS6bXE';
+const API_KEY = '...';
 
 // YTSearch({key: API_KEY, term: 'surfboards'}, function(data){
 //   console.log(data);
